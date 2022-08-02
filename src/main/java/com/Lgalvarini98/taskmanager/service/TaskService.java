@@ -15,19 +15,19 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     // GET ALL
-    public ArrayList<Task> getAllTasks(){
+    public ArrayList<Task> getAllTasks() {
         ArrayList<Task> tasks = (ArrayList<Task>) taskRepository.findAll();
         tasks.sort(Comparator.comparing(Task::isFinished).reversed());
         return tasks;
     }
 
     // GET BY ID
-    public Task getTask(Long id){
+    public Task getTask(Long id) {
         return taskRepository.findById(id).get();
     }
 
     // CREATE, POST
-    public Task addTask(Task task){
+    public Task addTask(Task task) {
         Task newTask = new Task();
 
         newTask.setTitle(task.getTitle());
@@ -39,19 +39,19 @@ public class TaskService {
     }
 
     // UPDATE
-    public Task updateTask(Task task){
+    public Task updateTask(Task task) {
         return taskRepository.save(task);
     }
 
     // FINISH
-    public Task finishTask(Long id){
+    public Task finishTask(Long id) {
         Task task = taskRepository.findById(id).get();
-        task.setFinished(true);
+        task.setFinished(!task.isFinished());
         return taskRepository.save(task);
     }
 
     // DELETE
-    public void deleteTask(Long id){
+    public void deleteTask(Long id) {
         taskRepository.deleteById(id);
     }
 }
