@@ -17,7 +17,7 @@ public class TaskService {
     // GET ALL
     public ArrayList<Task> getAllTasks() {
         ArrayList<Task> tasks = (ArrayList<Task>) taskRepository.findAll();
-        tasks.sort(Comparator.comparing(Task::isFinished).reversed());
+        tasks.sort(Comparator.comparing(Task::isFinished));
         return tasks;
     }
 
