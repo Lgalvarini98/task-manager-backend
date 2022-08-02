@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @RestController
 @CrossOrigin("*")
@@ -35,9 +36,16 @@ public class TaskController {
         return taskService.updateTask(task);
     }
 
+    @PutMapping("/finalize/{id}")
+    public Task finishTask(@PathVariable Long id){
+        return taskService.finishTask(id);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id){
         taskService.deleteTask(id);
     }
+
+
 
 }

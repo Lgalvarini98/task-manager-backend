@@ -17,7 +17,7 @@ public class Task {
     @Column(nullable = false)
     private String description;
 
-    @Column()
+    @Column(nullable = false)
     private String author;
 
     @Column()

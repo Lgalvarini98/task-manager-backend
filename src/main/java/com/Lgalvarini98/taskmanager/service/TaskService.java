@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @Service
 public class TaskService {
@@ -15,7 +16,9 @@ public class TaskService {
 
     // GET ALL
     public ArrayList<Task> getAllTasks(){
-        return (ArrayList<Task>) taskRepository.findAll();
+        ArrayList<Task> tasks = (ArrayList<Task>) taskRepository.findAll();
+        tasks.sort(Comparator.comparing(Task::isFinished).reversed());
+        return tasks;
     }
 
     // GET BY ID
@@ -35,8 +38,15 @@ public class TaskService {
         return taskRepository.save(newTask);
     }
 
-    // ACTUALIZAR
+    // UPDATE
     public Task updateTask(Task task){
+        return taskRepository.save(task);
+    }
+
+    // FINISH
+    public Task finishTask(Long id){
+        Task task = taskRepository.findById(id).get();
+        task.setFinished(true);
         return taskRepository.save(task);
     }
 
